@@ -1,0 +1,6 @@
+{
+    "require": {
+        "php-mqtt/client": "^1.8",
+        "lepiaf/serialport": "^1.1"
+    }
+}
