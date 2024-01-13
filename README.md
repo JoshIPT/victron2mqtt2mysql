@@ -1,5 +1,5 @@
 # victron2mqtt2mysql
-Victron VE.Direct to MQTT and MySQL
+Victron VE.Direct to MQTT and MySQL with bonus DHT11 humidity and temperature sensor
 
 # Requirements
 Depending on your Debian version. replace the below PHP versions with the current equivalent (ie. `php8.1-cli` for example)
@@ -35,6 +35,11 @@ Create /etc/mosquitto/pwfile and add your user as such:
 victron:victron
 ```
 Then run `mosquitto_passwd /etc/mosquitto/pwfile` to encrypt the password. Now restart Mosquitto: `systemctl restart mosquitto`
+# DHT11 sensor
+Modify tempsensor.c and update your MySQL details, and the `DHTPIN` to match your GPIO PIN used, then simple:
+```
+./build.sh
+```
 # Supervisor
 Create the file `/etc/supervisor/conf.d/victron.conf`. For MySQL add the following:
 ```
@@ -50,4 +55,12 @@ command=/opt/victron/victron2mqtt.php
 autostart=true
 autorestart=unexpected
 ```
+For DHT11:
+```
+[program:tempsensor]
+command=/opt/victron/tempsensor
+autostart=true
+autorestart=unexpected
+```
+
 Then ask Supervisor to restart: `systemctl restart supervisor`
