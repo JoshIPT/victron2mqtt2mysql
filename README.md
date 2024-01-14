@@ -40,6 +40,7 @@ Modify tempsensor.c and update your MySQL details, and the `DHTPIN` to match you
 ```
 ./build.sh
 ```
+You will require `libmariadb-dev` package to build `tempsensor`.
 # Supervisor
 Create the file `/etc/supervisor/conf.d/victron.conf`. For MySQL add the following:
 ```
